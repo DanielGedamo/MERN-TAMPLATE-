@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const cors = require('cors');
-// require('./DB')
+require('./DB')
 const path = require('path');
 const app = express();
 const port = 8080;
@@ -16,7 +16,7 @@ app.get('/', (req, res) => {
     res.send({ massage: "success" })
 })
 app.listen(port, () => {
-    console.log(process.env.CONNECTION_STRING);
+    // console.log(process.env.CONNECTION_STRING);
     console.log(`server listen on port: ${port}`);
 })
 //***********************/
