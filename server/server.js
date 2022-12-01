@@ -2,7 +2,7 @@ const dotenv = require('dotenv');
 dotenv.config();
 const express = require('express');
 const cors = require('cors');
-require('./DB')
+// require('./DB')
 const path = require('path');
 const app = express();
 const port = 8080;
