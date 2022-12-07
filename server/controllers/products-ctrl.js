@@ -1,6 +1,6 @@
 const productModel = require("../model/products");
 
-const getAll = async (req, res) => {
+const getAllProducts = async (req, res) => {
   await productModel.find({}).then((products, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getById =async (req,res) => {
+const getProductById =async (req,res) => {
    await productModel.findById(req.params.id)
    .then( (product) => {
         if(!product){
@@ -23,12 +23,12 @@ const getById =async (req,res) => {
     })
 }
 
-const create = async (req,res)=>{
+const createProduct = async (req,res)=>{
     await productModel.insertMany( req.body.product)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
+const updateProduct = async(req,res)=>{
  await productModel.findByIdAndUpdate(req.body.product)
  .then(products => res.status(200).json({success:true, massage:products}))
  .catch(error => res.status(400).json({success:false,massage:error}))
@@ -39,9 +39,9 @@ const deleteProduct = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+    getAllProducts,
+    getProductById,
+    createProduct,
+    updateProduct,
     deleteProduct,F
 }

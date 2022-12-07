@@ -1,6 +1,6 @@
 const dpartmentsModel = require("../model/departments");
 
-const getAll = async (req, res) => {
+const getAllDepartmentS = async (req, res) => {
   await dpartmentsModel.find({}).then((departments, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getById =async (req,res) => {
+const getDepartmentById =async (req,res) => {
    await dpartmentsModel.findById(req.params.id)
    .then( (department) => {
         if(!department){
@@ -23,12 +23,12 @@ const getById =async (req,res) => {
     })
 }
 
-const create = async (req,res)=>{
+const createDepartment = async (req,res)=>{
     await dpartmentsModel.insertMany( req.body.department)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
+const updateDepartment = async(req,res)=>{
  await dpartmentsModel.findByIdAndUpdate(req.body.department)
  .then(departments => res.status(200).json({success:true, massage:departments}))
  .catch(error => res.status(400).json({success:false,massage:error}))
@@ -39,9 +39,9 @@ const deletedepartment = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+    getAllDepartmentS,
+    getDepartmentById,
+    createDepartment,
+    updateDepartment,
     deletedepartment,
 }

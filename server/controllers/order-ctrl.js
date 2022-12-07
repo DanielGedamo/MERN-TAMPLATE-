@@ -1,7 +1,7 @@
 const orderModel = require("../model/orders");
 
-const getAll = async (req, res) => {
-  await orderModel.find({}).then((orders, error) => {
+const getAllOrders = async (req, res) => {
+   orderModel.find({}).then((orders, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
     }
@@ -9,27 +9,28 @@ const getAll = async (req, res) => {
       return res.json({ success: false, massage: "no orders found" });
     }
 
-    res.status(200).json({ success: true,orders });
+    return res.status(200).json({ success: true,orders });
   });
 };
 
-const getById =async (req,res) => {
+const getOrderById = async (req,res) => {
    await orderModel.findById(req.params.id)
    .then( (order) => {
         if(!order){
-            return res.status(200).json({success: false,massage:"no order"})
+            return res.json({success: false,massage:"no order"})
         }
-        return res.status(200).json({success:true,massage:order})
+        return res.status(200).json({success:true,order})
     })
+    .catch((error) => res.status(400).json({ success: false, error }))
 }
 
-const create = async (req,res)=>{
+const createOrder = async (req,res)=>{
     await orderModel.insertMany( req.body.order)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
- await orderModel.findByIdAndUpdate(req.body.order)
+const updateOrder = async(req,res)=>{
+  orderModel.findByIdAndUpdate(req.body.id)
  .then(orders => res.status(200).json({success:true, massage:orders}))
  .catch(error => res.status(400).json({success:false,massage:error}))
 }
@@ -39,9 +40,9 @@ const deleteorder = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+    getAllOrders,
+    getOrderById,
+    createOrder,
+    updateOrder,
     deleteorder,
 }

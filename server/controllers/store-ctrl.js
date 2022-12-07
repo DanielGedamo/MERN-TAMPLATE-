@@ -1,6 +1,6 @@
 const storModel = require("../model/orders");
 
-const getAll = async (req, res) => {
+const getAllStors = async (req, res) => {
   await storModel.find({}).then((orders, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getById =async (req,res) => {
+const getStorById =async (req,res) => {
    await storModel.findById(req.params.id)
    .then( (stor) => {
         if(!stor){
@@ -23,12 +23,12 @@ const getById =async (req,res) => {
     })
 }
 
-const create = async (req,res)=>{
+const createStor = async (req,res)=>{
     await storModel.insertMany( req.body.stor)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
+const updateStor = async(req,res)=>{
  await storModel.findByIdAndUpdate(req.body.stor)
  .then(orders => res.status(200).json({success:true, massage:orders}))
  .catch(error => res.status(400).json({success:false,massage:error}))
@@ -39,9 +39,9 @@ const deletestor = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+  getAllStors,
+  getStorById,
+    createStor,
+    updateStor,
     deletestor,
 }

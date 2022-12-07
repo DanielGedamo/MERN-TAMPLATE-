@@ -1,6 +1,6 @@
 const categorisModel = require("../model/categores");
 
-const getAll = async (req, res) => {
+const getAllCategores = async (req, res) => {
   await categorisModel.find({}).then((categores, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getById =async (req,res) => {
+const getCategoreById =async (req,res) => {
    await categorisModel.findById(req.params.id)
    .then( (categore) => {
         if(!categore){
@@ -23,12 +23,12 @@ const getById =async (req,res) => {
     })
 }
 
-const create = async (req,res)=>{
+const createCategore = async (req,res)=>{
     await categorisModel.insertMany( req.body.categore)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
+const updateCategore = async(req,res)=>{
  await categorisModel.findByIdAndUpdate(req.body.categore)
  .then(categores => res.status(200).json({success:true, massage:categores}))
  .catch(error => res.status(400).json({success:false,massage:error}))
@@ -39,9 +39,9 @@ const deletecategore = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+    getAllCategores,
+    getCategoreById,
+    createCategore,
+    updateCategore,
     deletecategore,
 }

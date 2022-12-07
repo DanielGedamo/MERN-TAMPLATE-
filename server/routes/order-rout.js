@@ -1,11 +1,16 @@
-const router = require('exspress').router
+const router = require('express').Router()
 const {
-    getAll,
-    getById,
-    create,
-    update,
+    getAllOrders,
+    getOrderById,
+    createOrder,
+    updateOrder,
     deleteorder,
 } = require("../controllers/order-ctrl")
 
-router.get("/",getAll);
-router.get("/byId",getById)
+router.get("/",getAllOrders);
+router.get("/byId",getOrderById);
+router.post("/addOrder",createOrder);
+router.put("/update",updateOrder);
+router.delete("/delete",deleteorder);
+
+module.exports = router;

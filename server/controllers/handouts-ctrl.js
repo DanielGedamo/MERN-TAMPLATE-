@@ -1,6 +1,6 @@
 const handoutsModel = require("../model/handouts");
 
-const getAll = async (req, res) => {
+const getAllHandouts = async (req, res) => {
   await handoutsModel.find({}).then((handouts, error) => {
     if (error) {
       return res.status(400).json({ success: false, error });
@@ -13,7 +13,7 @@ const getAll = async (req, res) => {
   });
 };
 
-const getById =async (req,res) => {
+const getHandoutById =async (req,res) => {
    await handoutsModel.findById(req.params.id)
    .then( (handdouts) => {
         if(!handdouts){
@@ -23,12 +23,12 @@ const getById =async (req,res) => {
     })
 }
 
-const create = async (req,res)=>{
+const createHandout = async (req,res)=>{
     await handoutsModel.insertMany( req.body.handdouts)
     .then((result) => res.status(200).json({success:true,result}))
     .catch((error)=>res.status(400).json({success:false,massage:error}))
 }
-const update = async(req,res)=>{
+const updateHandout = async(req,res)=>{
  await handoutsModel.findByIdAndUpdate(req.body.handdouts)
  .then(handouts => res.status(200).json({success:true, massage:handouts}))
  .catch(error => res.status(400).json({success:false,massage:error}))
@@ -39,9 +39,9 @@ const deletehanddouts = async (req,res) => {
  .catch(error => res.status(400).json({success:false,error}))
 }
 module.exports = {
-    getAll,
-    getById,
-    create,
-    update,
+  getAllHandouts,
+    getHandoutById,
+    createHandout,
+    updateHandout,
     deletehanddouts,
 }

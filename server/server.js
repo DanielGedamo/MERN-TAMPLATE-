@@ -7,10 +7,11 @@ const path = require('path');
 const app = express();
 const port = 8080;
 
+const orderRouter = require("./routes/order-rout")
 app.use(express.json({ extended: true }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cors())
-
+app.use("/addOrder" ,orderRouter)
 
 app.get('/', (req, res) => {
     res.send({ massage: "success" })
